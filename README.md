@@ -1,6 +1,6 @@
 # Anime API
 
-Project Name: Lab 10
+Project Name: Lab 11
 
 Description: Андроид приложение подключенное к [Anime API](https://kitsu.docs.apiary.io/), которое загружает список аниме и позволяет любому пользователю отфильтровать и добавить в списк сохраненные.
 
