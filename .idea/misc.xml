@@ -3,8 +3,20 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/layout/activity_main.xml" value="0.3333333333333333" />
-        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/menu/bottom_nav_menu.xml" value="0.1796875" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_bookmark.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_calendar.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_home.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/layout/activity_main.xml" value="0.26057529610829105" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/menu/bottom_nav_menu.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/activity_anime.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/activity_main.xml" value="0.12134831460674157" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/anime_rv_item.xml" value="0.1" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/fragment_calendar.xml" value="0.1203125" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/fragment_favourites.xml" value="0.1" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/fragment_home.xml" value="0.22" />
       </map>
     </option>
   </component>

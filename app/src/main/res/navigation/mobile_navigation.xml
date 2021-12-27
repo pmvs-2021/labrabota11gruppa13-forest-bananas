@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.zlatamigas.testbottomnavigation.ui.home.HomeFragment"
+        android:name="com.zlatamigas.testbottomnavigation.ui.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.zlatamigas.testbottomnavigation.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_calendar"
+        android:name="com.zlatamigas.testbottomnavigation.ui.CalendarFragment"
+        android:label="@string/title_calendar"
+        tools:layout="@layout/fragment_calendar" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.zlatamigas.testbottomnavigation.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_favourites"
+        android:name="com.zlatamigas.testbottomnavigation.ui.FavouritesFragment"
+        android:label="@string/title_favourite"
+        tools:layout="@layout/fragment_favourites" />
 </navigation>

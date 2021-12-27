@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="nav_bar_icons_color">@color/white</color>
+    <color name="black_shade_1">#292D36</color>
+    <color name="card_background">#FF292D36</color>
 </resources>

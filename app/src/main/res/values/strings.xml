@@ -1,6 +1,30 @@
 <resources>
     <string name="app_name">TestBottomNavigation</string>
+    <string name="title_calendar">Calendar</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_favourite">Favourite</string>
+    <string name="demo_description">3333333333
+        dbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        dbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        dbssnggdddddddffffffffffffffffffffffffffffffffffffffffffffffffff
+        fffffffffffffffffffffffffffffffff
+        dfg
+        fdbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+        cvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+        sbdffdbgsfgkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+        xxxxxxxxxxxxxxxewfkgvno khubvkusnv
+        dfbdslkb j;ljdmd
+        sdpfffffffffffffffffffffff
+        dfssfffffffffffffffffffffffffffff
+        s
+        dgfvvvvvvvvvvvvvvvvvvvvvv
+        sfvsdfkxxxxx
+        11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
+        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+        zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+        assssssssssssssssssssssssssssssssssssssss
+        eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeas
+        qeffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+        qeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+        3weeee333333333333333333333333333333333333333</string>
 </resources>
