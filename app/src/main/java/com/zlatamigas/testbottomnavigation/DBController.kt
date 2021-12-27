@@ -68,6 +68,7 @@ class DBController(val helper: SQLiteOpenHelper)
             } while (c.moveToNext())
         }
 
+        c.close()
         return result
     }
 
@@ -98,6 +99,7 @@ class DBController(val helper: SQLiteOpenHelper)
             } while (c.moveToNext())
         }
 
+        c.close()
         return result
     }
 
@@ -109,5 +111,13 @@ class DBController(val helper: SQLiteOpenHelper)
     fun deleteFavourite(id: Int): Int {
         val db = helper.readableDatabase
         return db.delete(FAVOURITES_TABLE_NAME, "$COLUMN_ROW_ID = $id", null)
+    }
+
+    fun updateReminderDate(rowId: Int, newDate: Date): Int {
+        val cv = ContentValues()
+        cv.put(COLUMN_NOTIFY_DATE, newDate.toString())
+
+        val db = helper.writableDatabase
+        return db.update(REMINDERS_TABLE_NAME, cv, "$COLUMN_ROW_ID = $rowId", null)
     }
 }
