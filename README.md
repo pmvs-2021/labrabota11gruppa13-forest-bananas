@@ -13,3 +13,5 @@ Contributing: Got - Gang of Trio
 * Менеджер проекта - Злата
 * Тестировщик - Катя
 * Проектировщик интерфейсов - Рома
+
+[![Build Status](https://app.travis-ci.com/pmvs-2021/labrabota11gruppa13-forest-bananas.svg?branch=main)](https://app.travis-ci.com/pmvs-2021/labrabota11gruppa13-forest-bananas)
