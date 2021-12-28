@@ -55,6 +55,8 @@ class FavouritesFragment : Fragment() {
         val controller = this.context?.let { it1 -> AnimeAPIController(it1) }
 
         val favourites = dbController?.getFavourites()
+
+
         if (favourites != null) {
             for (favourite in favourites) {
                 GlobalScope.launch {
