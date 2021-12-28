@@ -45,12 +45,12 @@ class FavouritesFragment : Fragment() {
 
         animeRVModalArrayList = ArrayList()
         animeRVAdapter = AnimeRVAdapter(requireActivity(), animeRVModalArrayList!!)
-        animeRVAdapter.notifyDataSetChanged()
         idRVAnimeListFound.setAdapter(animeRVAdapter)
 
         idIVFilter.setOnClickListener(View.OnClickListener {
             //TODO
         })
+
         val dbController = (activity as MainActivity).dbController
         val controller = this.context?.let { it1 -> AnimeAPIController(it1) }
 
@@ -71,12 +71,18 @@ class FavouritesFragment : Fragment() {
                                 )
                             )
                         }
+                        animeRVAdapter.notifyDataSetChanged()
                     }
                 }
             }
         }
 
         return root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        animeRVAdapter.notifyDataSetChanged()
     }
 
     override fun onDestroyView() {
