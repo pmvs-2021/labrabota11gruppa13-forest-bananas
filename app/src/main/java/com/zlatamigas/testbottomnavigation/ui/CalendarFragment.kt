@@ -21,6 +21,7 @@ import android.R
 import android.content.Context
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
 import java.lang.StringBuilder
+import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -49,9 +50,22 @@ class CalendarFragment : Fragment() {
         idRVAnimeListFound.setAdapter(animeRVAdapter)
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            val date = Date(year, month, dayOfMonth)
 
-            val dateReminders = reminders?.filter { r -> r.reminderDate == date }
+            val date = Calendar.getInstance()
+
+            date.set(Calendar.YEAR, year)
+            date.set(Calendar.MONTH, month)
+            date.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            val output = SimpleDateFormat("dd.MM.yyyy")
+            val nowDate = output.format(date.time)
+
+            val dateReminders = reminders?.filter { r ->
+                val temp = output.format(r.reminderDate)
+                temp.equals(nowDate) }
+
+            animeRVModalArrayList.clear()
+            animeRVAdapter.notifyDataSetChanged()
 
             if (dateReminders != null) {
                 for (favourite in dateReminders) {
