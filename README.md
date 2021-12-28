@@ -19,11 +19,20 @@ ____
 ____
 ### `Usage`
 Ищем в каталоге или поиском нужное нам произведение. Добавляем его в избранное, при необходимости можем удалить его. Так же возможен просмотр списка избранное.
-<center><video style="border-radius: 10px;"src="ScreanShots\cat.mp4" autoplay width="200"></center>
-* Ищем в каталоге или поиском нужное нам произведение.<br>
-<center><img style="border-radius: 10px;"src="ScreanShots\home.jpg" alt="drawing" width="200"></center>
+<p align="center">
+  <kbd> <img src="ScreanShots\cat.gif" alt="drawing" width="300" style="border-radius:10px"\></kbd>
+</p>
+
+* Ищем в каталоге или поиском нужное нам произведение. 
+ <p align="center">
+  <kbd> <img src="ScreanShots\home.jpg" alt="drawing" width="300" style="border-radius:10px"\></kbd> 
+</p>
+ 
 * В появившеся окне подробного описания нажимаем добавить в избранное(кнопка звезды) и устанавливаем напоминание.
-<center><img style="border-radius: 10px;"src="ScreanShots\preview.jpg" alt="drawing" width="200"></center>
+<p align="center">
+  <kbd> <img src="ScreanShots\preview.jpg" alt="drawing" width="300" style="border-radius:10px"\></kbd> 
+</p>
+
 * При необходимости можем удалить его. 
 * Так же возможен просмотр списка избранное.
 ____
