@@ -34,7 +34,7 @@ class AnimeRVAdapter(
 
         holder.idTV.setText(modal.id.toString())
 
-        holder.ratingTV.setText("${modal.rating}/100")
+        holder.ratingTV.setText("$\uD83D\uDD1D {modal.rating}/100")
         holder.titleTV.setText(modal.title)
         holder.episodesTV.setText("${modal.episodes}  Eps.")
 
