@@ -8,7 +8,6 @@
         android:background="@color/black_shade_1">
 
 
-
         <LinearLayout
             android:id="@+id/idLLFilter"
             android:layout_width="match_parent"

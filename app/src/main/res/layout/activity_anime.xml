@@ -34,26 +34,56 @@
                 android:textColor="@color/white"
                 android:textSize="32sp" />
 
-
-            <TextView
-                android:id="@+id/idTVAnimeRating"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"
-                android:text="9.5/10"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginBottom="10dp">
 
-            <TextView
-                android:id="@+id/idTVAnimeYears"
+                <TextView
+                    android:id="@+id/idTVAnimeRating"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="9.5/10"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:layout_weight="4" />
+                <ImageView
+                    android:id="@+id/idIVAddFavourite"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_star_not_selected"
+                    android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:gravity="center_vertical"
-                android:text="12.2002 - 03.2008"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:orientation="horizontal"
+                android:weightSum="5"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:id="@+id/idTVAnimeYears"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="12.2002 - 03.2008"
+                    android:layout_weight="4"
+                    android:textColor="@color/white"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/idIVAddNotification"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_notify_off"/>
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/idTVAnimeEpisodes"
