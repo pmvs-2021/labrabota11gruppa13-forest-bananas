@@ -100,9 +100,10 @@ class HomeFragment : Fragment() {
                             for (anime in animes) {
                                 animeRVModalArrayList.add(
                                     AnimeRVModal(
+                                        anime.id,
                                         checkNullString(anime.title),
-                                        checkNullString(anime.rating.toString()),
-                                        checkNullString(anime.episodeCount.toString()),
+                                        checkNullString(anime.rating),
+                                        checkNullString(anime.episodeCount),
                                         anime.posterImage
                                     )
                                 )
@@ -110,15 +111,17 @@ class HomeFragment : Fragment() {
                         }
                     }
                 }
+                idRVAnimeListFound.refreshDrawableState()
             }
         })
+
         return root
     }
 
-    fun checkNullString(str: String?): String{
-        if(str.isNullOrEmpty())
-            return ""
-        return str
+    fun checkNullString(str: Any?): String{
+        if(str == null)
+            return "--"
+        return str.toString()
     }
 
     override fun onDestroyView() {

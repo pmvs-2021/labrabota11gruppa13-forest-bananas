@@ -2,12 +2,14 @@ package com.zlatamigas.pvimslab10_4_v2kotlin
 
 class AnimeRVModal {
 
+    var id: Int = -1
     var title: String? = null
     var rating: String? = null
     var episodes: String? = null
     var preview: String? = null
 
-    constructor(title: String?, rating: String?, eoisodes: String?, preview: String?) {
+    constructor(id: Int, title: String?, rating: String?, eoisodes: String?, preview: String?) {
+        this.id = id
         this.title = title
         this.rating = rating
         this.episodes = eoisodes
