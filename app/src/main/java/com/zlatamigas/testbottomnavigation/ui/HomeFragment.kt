@@ -24,6 +24,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var page = 0
 
     lateinit var idRVAnimeListFound: RecyclerView
     lateinit var idIVSearch: ImageView
@@ -41,6 +42,8 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val controller = this.context?.let { it1 -> AnimeAPIController(it1) }
+
         idRVAnimeListFound = binding.idRVAnimeListFound
         idIVSearch = binding.idIVSearch
         idTIESearch = binding.idTIESearch
@@ -51,6 +54,33 @@ class HomeFragment : Fragment() {
 
         idRVAnimeListFound.setAdapter(animeRVAdapter)
 
+        idRVAnimeListFound.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1)){
+                    page++
+                    GlobalScope.launch {
+                        val animes = controller?.getAnimes(idTIESearch.text.toString(),
+                            null, null, null, page)
+                        withContext(Dispatchers.Main) {
+                            if (animes != null) {
+                                for (anime in animes) {
+                                    animeRVModalArrayList.add(
+                                        AnimeRVModal(
+                                            anime.title,
+                                            anime.rating.toString(),
+                                            anime.episodeCount.toString(),
+                                            anime.posterImage
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        })
+
         idIVSearch.setOnClickListener(View.OnClickListener {
             val str = idTIESearch.getText().toString()
             if (str.isEmpty()) {
@@ -58,11 +88,11 @@ class HomeFragment : Fragment() {
                     .show()
             }
             else {
-                val controller = this.context?.let { it1 -> AnimeAPIController(it1) }
+                page = 0
                 GlobalScope.launch {
                     val animes = controller?.getAnimes(
                         idTIESearch.text.toString(),
-                        null, null, null, 0
+                        null, null, null, page
                     )
                     withContext(Dispatchers.Main) {
                         animeRVModalArrayList.clear()

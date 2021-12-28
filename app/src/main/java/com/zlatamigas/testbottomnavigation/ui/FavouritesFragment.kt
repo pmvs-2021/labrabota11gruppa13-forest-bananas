@@ -10,7 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
+import com.zlatamigas.testbottomnavigation.AnimeAPIController
+import com.zlatamigas.testbottomnavigation.MainActivity
 import com.zlatamigas.testbottomnavigation.databinding.FragmentFavouritesBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 class FavouritesFragment : Fragment() {
@@ -45,7 +51,28 @@ class FavouritesFragment : Fragment() {
         idIVFilter.setOnClickListener(View.OnClickListener {
             //TODO
         })
-        fillDemoData()
+        val dbController = (activity as MainActivity).dbController
+        val controller = this.context?.let { it1 -> AnimeAPIController(it1) }
+
+        val favourites = dbController?.getFavourites()
+        if (favourites != null) {
+            for (favourite in favourites) {
+                GlobalScope.launch {
+                    val anime = controller?.getAnime(favourite.id)
+                    withContext(Dispatchers.Main) {
+                        if (anime != null) {
+                            AnimeRVModal(
+                                anime.title, 
+                                anime.rating.toString(),
+                                anime.episodeCount.toString(),
+                                anime.posterImage
+                            )
+                        }
+                    }
+                }
+            }
+        }
+        //fillDemoData()
 
         return root
     }

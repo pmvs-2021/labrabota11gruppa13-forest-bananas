@@ -39,6 +39,15 @@ class DBController(val helper: SQLiteOpenHelper)
         return result != -1L
     }
 
+    fun isFavourite(id: Int): Boolean {
+        val db = helper.readableDatabase
+        val c = db.query(FAVOURITES_TABLE_NAME,
+            null, "id=$id", null, null, null, null)
+        var result = c.moveToFirst()
+        c.close()
+        return result
+    }
+
     fun getReminders(): List<Reminder> {
         val db = helper.readableDatabase
         val c = db.query(REMINDERS_TABLE_NAME,

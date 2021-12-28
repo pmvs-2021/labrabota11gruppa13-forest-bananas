@@ -14,6 +14,7 @@ import com.zlatamigas.testbottomnavigation.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    public var dbController: DBController? = null
     private lateinit var binding: ActivityMainBinding
     private val DATABASE_NAME = "AnimeDB"
     private val DATABASE_VERSION = 1
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity() {
 
         val navView: BottomNavigationView = binding.navView
 
+        val helper = DBHelper(this)
+        dbController = DBController(helper)
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
         navView.setupWithNavController(navController)
     }
