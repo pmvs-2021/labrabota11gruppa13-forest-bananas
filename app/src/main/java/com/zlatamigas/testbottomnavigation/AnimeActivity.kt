@@ -1,17 +1,17 @@
 package com.zlatamigas.testbottomnavigation
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
-import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.ParseException
 import java.text.SimpleDateFormat
+import java.util.*
 
 class AnimeActivity : AppCompatActivity() {
 
@@ -29,8 +29,12 @@ class AnimeActivity : AppCompatActivity() {
     lateinit var idPBLoadAnimePage: ProgressBar
     lateinit var idSVAnimeData: ScrollView
 
+    lateinit var dbController: DBController
+
+    var dateAndTime: Calendar = Calendar.getInstance()
+
     var isFavourite = false
-    var isNotified = false
+    //var isNotified = false
 
     var idAnime: Int = -1
     var anime: Anime? = null
@@ -39,7 +43,7 @@ class AnimeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anime)
 
-        val dbController = DBController(DBHelper(this))
+        dbController = DBController(DBHelper(this))
 
         val extr = intent.extras
         if (extr != null) {
@@ -92,14 +96,24 @@ class AnimeActivity : AppCompatActivity() {
         }
 
         idIVAddNotification.setOnClickListener {
-            idIVAddNotification.setImageResource(
-                if (isNotified) {
-                    R.drawable.ic_notify_off
-                } else {
-                    R.drawable.ic_notify_on
-                }
-            )
-            isNotified = !isNotified
+
+
+//            idIVAddNotification.setImageResource(
+//                if (isNotified) {
+//                    R.drawable.ic_notify_off
+//                } else {
+//                    R.drawable.ic_notify_on
+//                }
+//            )
+//            isNotified = !isNotified
+
+            DatePickerDialog(
+                this, dateChoosen,
+                dateAndTime.get(Calendar.YEAR),
+                dateAndTime.get(Calendar.MONTH),
+                dateAndTime.get(Calendar.DAY_OF_MONTH)
+            ).show()
+
         }
 
         val controller = this.let { it1 -> AnimeAPIController(it1) }
@@ -154,4 +168,16 @@ class AnimeActivity : AppCompatActivity() {
         super.onBackPressed()
         finish()
     }
+
+
+
+    // установка обработчика выбора даты
+    var dateChoosen =
+        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            dateAndTime.set(Calendar.YEAR, year)
+            dateAndTime.set(Calendar.MONTH, monthOfYear)
+            dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
+            dbController.addReminder(anime!!.id, anime!!.title, dateAndTime.time)
+        }
 }
