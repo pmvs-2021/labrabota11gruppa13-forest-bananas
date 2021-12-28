@@ -25,12 +25,6 @@ class AnimeRVAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.anime_rv_item, parent, false)
 
-//        view.setOnClickListener()
-//        {
-//            val intent = Intent(context, AnimeActivity::class.java)
-//            context.startActivity(intent)
-//        }
-
         return ViewHolder(view)
     }
 

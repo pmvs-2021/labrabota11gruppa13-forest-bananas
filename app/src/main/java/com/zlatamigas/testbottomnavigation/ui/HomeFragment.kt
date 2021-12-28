@@ -84,6 +84,7 @@ class HomeFragment : Fragment() {
                 idRVAnimeListFound.refreshDrawableState()
             }
         })
+
         return root
     }
 
