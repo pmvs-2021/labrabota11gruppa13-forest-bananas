@@ -1,5 +1,6 @@
 package com.zlatamigas.testbottomnavigation.ui
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.google.android.material.textfield.TextInputEditText
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
 import com.zlatamigas.testbottomnavigation.AnimeAPIController
+import com.zlatamigas.testbottomnavigation.MainActivity
 import com.zlatamigas.testbottomnavigation.databinding.FragmentHomeBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -50,7 +52,7 @@ class HomeFragment : Fragment() {
 
 
         animeRVModalArrayList = ArrayList()
-        animeRVAdapter = AnimeRVAdapter(requireActivity(), animeRVModalArrayList!!)
+        animeRVAdapter = AnimeRVAdapter(activity as MainActivity, animeRVModalArrayList!!)
 
         idRVAnimeListFound.setAdapter(animeRVAdapter)
 
@@ -67,6 +69,7 @@ class HomeFragment : Fragment() {
                                 for (anime in animes) {
                                     animeRVModalArrayList.add(
                                         AnimeRVModal(
+                                            anime.id,
                                             anime.title,
                                             anime.rating.toString(),
                                             anime.episodeCount.toString(),

@@ -45,7 +45,7 @@ class FavouritesFragment : Fragment() {
 
         animeRVModalArrayList = ArrayList()
         animeRVAdapter = AnimeRVAdapter(requireActivity(), animeRVModalArrayList!!)
-
+        animeRVAdapter.notifyDataSetChanged()
         idRVAnimeListFound.setAdapter(animeRVAdapter)
 
         idIVFilter.setOnClickListener(View.OnClickListener {
@@ -61,18 +61,20 @@ class FavouritesFragment : Fragment() {
                     val anime = controller?.getAnime(favourite.id)
                     withContext(Dispatchers.Main) {
                         if (anime != null) {
-                            AnimeRVModal(
-                                anime.title, 
-                                anime.rating.toString(),
-                                anime.episodeCount.toString(),
-                                anime.posterImage
+                            animeRVModalArrayList.add(
+                                AnimeRVModal(
+                                    anime.id,
+                                    anime.title,
+                                    anime.rating.toString(),
+                                    anime.episodeCount.toString(),
+                                    anime.posterImage
+                                )
                             )
                         }
                     }
                 }
             }
         }
-        //fillDemoData()
 
         return root
     }
@@ -80,19 +82,5 @@ class FavouritesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun fillDemoData() {
-        animeRVModalArrayList!!.clear()
-        for (i in 0 until 3) {
-            animeRVModalArrayList.add(
-                AnimeRVModal(
-                    (i * 45).toString(),
-                    "10/10",
-                    "133 Eps.",
-                    "//cdn-icons-png.flaticon.com/512/4508/4508103.png"
-                )
-            )
-        }
     }
 }

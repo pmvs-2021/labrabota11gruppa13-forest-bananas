@@ -1,5 +1,6 @@
 package com.zlatamigas.pvimslab10_4_v2kotlin
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -18,7 +19,7 @@ import java.lang.NumberFormatException
 import java.util.ArrayList
 
 class AnimeRVAdapter(
-    private val context: Context,
+    private val context: Activity,
     private val animeRVModalArrayList: ArrayList<AnimeRVModal>
 ) :
     RecyclerView.Adapter<AnimeRVAdapter.ViewHolder>() {

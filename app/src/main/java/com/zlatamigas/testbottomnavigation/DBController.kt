@@ -21,7 +21,7 @@ class DBController(val helper: SQLiteOpenHelper)
         val cv = ContentValues()
         cv.put(COLUMN_ID, id)
         cv.put(COLUMN_NAME, name)
-        cv.put(COLUMN_NOTIFY_DATE, date.toString())
+        cv.put(COLUMN_NOTIFY_DATE, SimpleDateFormat().format(date))
 
         val db = helper.writableDatabase
         val result = db.insert(REMINDERS_TABLE_NAME, null, cv)
@@ -32,7 +32,7 @@ class DBController(val helper: SQLiteOpenHelper)
         val cv = ContentValues()
         cv.put(COLUMN_ID, id)
         cv.put(COLUMN_NAME, name)
-        cv.put(COLUMN_ADD_DATE, Date().toString())
+        cv.put(COLUMN_ADD_DATE, SimpleDateFormat().format(Date()))
 
         val db = helper.writableDatabase
         val result = db.insert(FAVOURITES_TABLE_NAME, null, cv)
@@ -124,7 +124,7 @@ class DBController(val helper: SQLiteOpenHelper)
 
     fun updateReminderDate(rowId: Int, newDate: Date): Int {
         val cv = ContentValues()
-        cv.put(COLUMN_NOTIFY_DATE, newDate.toString())
+        cv.put(COLUMN_NOTIFY_DATE, SimpleDateFormat().format(newDate))
 
         val db = helper.writableDatabase
         return db.update(REMINDERS_TABLE_NAME, cv, "$COLUMN_ROW_ID = $rowId", null)
