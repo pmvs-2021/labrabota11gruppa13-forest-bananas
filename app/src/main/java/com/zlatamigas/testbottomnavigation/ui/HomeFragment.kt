@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     lateinit var idRVAnimeListFound: RecyclerView
+    lateinit var idPBLoadSearchResults: ProgressBar
     lateinit var idIVSearch: ImageView
     lateinit var idTIESearch: TextInputEditText
 
@@ -42,6 +44,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         idRVAnimeListFound = binding.idRVAnimeListFound
+        idPBLoadSearchResults = binding.idPBLoadSearchResults
         idIVSearch = binding.idIVSearch
         idTIESearch = binding.idTIESearch
 
@@ -53,11 +56,12 @@ class HomeFragment : Fragment() {
 
         idIVSearch.setOnClickListener(View.OnClickListener {
             val str = idTIESearch.getText().toString()
-            if (str.isEmpty()) {
-                Toast.makeText(requireActivity(), "Please enter Anime Title", Toast.LENGTH_SHORT)
-                    .show()
-            }
-            else {
+
+            if (!str.isEmpty()) {
+
+                idRVAnimeListFound.visibility = View.GONE
+                idPBLoadSearchResults.visibility = View.VISIBLE
+
                 val controller = this.context?.let { it1 -> AnimeAPIController(it1) }
                 GlobalScope.launch {
                     val animes = controller?.getAnimes(
@@ -79,9 +83,16 @@ class HomeFragment : Fragment() {
                                 )
                             }
                         }
+
+                        animeRVAdapter.notifyDataSetChanged()
+                        idRVAnimeListFound.visibility = View.VISIBLE
+                        idPBLoadSearchResults.visibility = View.GONE
                     }
                 }
-                idRVAnimeListFound.refreshDrawableState()
+            }
+            else {
+                Toast.makeText(requireActivity(), "Please enter Anime Title", Toast.LENGTH_SHORT)
+                    .show()
             }
         })
 

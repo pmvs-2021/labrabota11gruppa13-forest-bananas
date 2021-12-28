@@ -6,10 +6,20 @@
     android:background="@color/black_shade_1"
     tools:context=".AnimeActivity">
 
+    <ProgressBar
+        android:id="@+id/idPBLoadAnimePage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:indeterminateTint="@color/purple_200"
+        android:visibility="visible"/>
+
     <ScrollView
+        android:id="@+id/idSVAnimeData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="20dp">
+        android:layout_marginBottom="20dp"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="match_parent"

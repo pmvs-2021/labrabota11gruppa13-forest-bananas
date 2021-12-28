@@ -1,9 +1,8 @@
 package com.zlatamigas.testbottomnavigation
 
 import android.os.Bundle
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.View
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
@@ -27,6 +26,8 @@ class AnimeActivity : AppCompatActivity() {
     lateinit var idTVAnimeAge: TextView
     lateinit var idTVAnimeGenres: TextView
     lateinit var idTVAnimeDescription: TextView
+    lateinit var idPBLoadAnimePage: ProgressBar
+    lateinit var idSVAnimeData: ScrollView
 
     var isFavourite = false
     var isNotified = false
@@ -39,14 +40,16 @@ class AnimeActivity : AppCompatActivity() {
 
         //Receive data from bundle about depicted element
         val extr = intent.extras
-        if(extr!=null){
+        if (extr != null) {
             idAnime = extr.getInt("idAnime")
-            Toast.makeText(this, idAnime.toString(), Toast.LENGTH_SHORT).show()
         }
 
         idIVAddFavourite = findViewById(R.id.idIVAddFavourite)
         idIVAddNotification = findViewById(R.id.idIVAddNotification)
         idIVAnimeCover = findViewById(R.id.idIVAnimeCover)
+
+        idPBLoadAnimePage = findViewById(R.id.idPBLoadAnimePage)
+        idSVAnimeData = findViewById(R.id.idSVAnimeData)
 
         idTVAnimeTitle = findViewById(R.id.idTVAnimeTitle)
         idTVAnimeRating = findViewById(R.id.idTVAnimeRating)
@@ -81,30 +84,39 @@ class AnimeActivity : AppCompatActivity() {
         val controller = this.let { it1 -> AnimeAPIController(it1) }
         GlobalScope.launch {
             val anime = controller.getAnime(idAnime)
-                withContext(Dispatchers.Main) {
-                    idTVAnimeTitle.setText(checkNullString(anime!!.title))
-                    idTVAnimeRating.setText("${checkNullString(anime!!.rating)}/100")
+            withContext(Dispatchers.Main) {
+                idTVAnimeTitle.setText(checkNullString(anime!!.title))
+                idTVAnimeRating.setText("${checkNullString(anime!!.rating)}/100")
 
-                    //val input = SimpleDateFormat("ddd MMM dd HH:mm:ss ZZZZ yyyy")
-                    val output = SimpleDateFormat("MM.yyyy")
+                //val input = SimpleDateFormat("ddd MMM dd HH:mm:ss ZZZZ yyyy")
+                val output = SimpleDateFormat("MM.yyyy")
 
 
-                    idTVAnimeYears.setText("${output.format(anime!!.startDate)} - ${output.format(anime!!.endDate)}")
-                    idTVAnimeEpisodes.setText("Episodes: ${checkNullString(anime!!.episodeCount)} (${checkNullString(anime!!.episodeLength)} min)")
-                    idTVAnimeAge.setText("Age: ${checkNullString(anime!!.ageRating)}")
-                    idTVAnimeGenres.setText("Genres: ")
-                    for (g in anime!!.genres){
-                         idTVAnimeGenres.append("${checkNullString(g)} ")
-                    }
-                    idTVAnimeDescription.setText(checkNullString(anime!!.synopsis))
-                    Picasso.get().load(anime!!.posterImage).fit().into(idIVAnimeCover)
+                idTVAnimeYears.setText("${output.format(anime!!.startDate)} - ${output.format(anime!!.endDate)}")
+                idTVAnimeEpisodes.setText(
+                    "Episodes: ${checkNullString(anime!!.episodeCount)} (${
+                        checkNullString(
+                            anime!!.episodeLength
+                        )
+                    } min)"
+                )
+                idTVAnimeAge.setText("${checkNullString(anime.ageRating)}")
+                idTVAnimeGenres.setText("Genres: ")
+                for (g in anime.genres) {
+                    idTVAnimeGenres.append("${checkNullString(g)} ")
                 }
+                idTVAnimeDescription.setText(checkNullString(anime!!.synopsis))
+                Picasso.get().load(anime!!.posterImage).fit().into(idIVAnimeCover)
+
+                idPBLoadAnimePage.visibility = View.GONE
+                idSVAnimeData.visibility = View.VISIBLE
             }
 
+        }
     }
 
-    fun checkNullString(str: Any?): String{
-        if(str == null)
+    fun checkNullString(str: Any?): String {
+        if (str == null)
             return "--"
         return str.toString()
     }

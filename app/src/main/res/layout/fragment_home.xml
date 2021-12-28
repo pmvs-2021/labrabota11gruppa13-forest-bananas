@@ -55,14 +55,29 @@
     </LinearLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idRVAnimeListFound"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentBottom="true"
+    <FrameLayout
         android:layout_below="@id/idLLSearch"
-        android:orientation="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ProgressBar
+            android:id="@+id/idPBLoadSearchResults"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/purple_200"
+            android:visibility="gone"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/idRVAnimeListFound"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:visibility="visible"/>
+    </FrameLayout>
 
 
 </RelativeLayout>
