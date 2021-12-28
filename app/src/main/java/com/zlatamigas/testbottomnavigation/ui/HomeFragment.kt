@@ -11,7 +11,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
+import com.zlatamigas.testbottomnavigation.AnimeAPIController
 import com.zlatamigas.testbottomnavigation.databinding.FragmentHomeBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.ArrayList
 
 
@@ -32,6 +37,7 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -50,31 +56,43 @@ class HomeFragment : Fragment() {
             if (str.isEmpty()) {
                 Toast.makeText(requireActivity(), "Please enter Anime Title", Toast.LENGTH_SHORT)
                     .show()
-            } else {
-                //TODO
+            }
+            else {
+                val controller = this.context?.let { it1 -> AnimeAPIController(it1) }
+                GlobalScope.launch {
+                    val animes = controller?.getAnimes(
+                        idTIESearch.text.toString(),
+                        null, null, null, 0
+                    )
+                    withContext(Dispatchers.Main) {
+                        animeRVModalArrayList.clear()
+                        if (animes != null) {
+                            for (anime in animes) {
+                                animeRVModalArrayList.add(
+                                    AnimeRVModal(
+                                        checkNullString(anime.title),
+                                        checkNullString(anime.rating.toString()),
+                                        checkNullString(anime.episodeCount.toString()),
+                                        anime.posterImage
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
             }
         })
-
-        fillDemoData()
         return root
+    }
+
+    fun checkNullString(str: String?): String{
+        if(str.isNullOrEmpty())
+            return ""
+        return str
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun fillDemoData() {
-        animeRVModalArrayList!!.clear()
-        for (i in 0 until 10) {
-            animeRVModalArrayList.add(
-                AnimeRVModal(
-                    (i * 19).toString(),
-                    "9/10",
-                    "13 Eps.",
-                    "//cdn-icons-png.flaticon.com/512/4508/4508103.png"
-                )
-            )
-        }
     }
 }
