@@ -34,7 +34,6 @@ class AnimeActivity : AppCompatActivity() {
     var dateAndTime: Calendar = Calendar.getInstance()
 
     var isFavourite = false
-    //var isNotified = false
 
     var idAnime: Int = -1
     var anime: Anime? = null
@@ -96,16 +95,6 @@ class AnimeActivity : AppCompatActivity() {
         }
 
         idIVAddNotification.setOnClickListener {
-
-
-//            idIVAddNotification.setImageResource(
-//                if (isNotified) {
-//                    R.drawable.ic_notify_off
-//                } else {
-//                    R.drawable.ic_notify_on
-//                }
-//            )
-//            isNotified = !isNotified
 
             DatePickerDialog(
                 this, dateChoosen,
@@ -179,5 +168,7 @@ class AnimeActivity : AppCompatActivity() {
             dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
             dbController.addReminder(anime!!.id, anime!!.title, dateAndTime.time)
+
+            //TODO ADD NOTIFICATION OUT OF APP (ROMAN)
         }
 }
