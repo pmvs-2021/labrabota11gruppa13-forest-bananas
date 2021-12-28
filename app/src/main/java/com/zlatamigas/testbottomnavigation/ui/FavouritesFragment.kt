@@ -67,8 +67,8 @@ class FavouritesFragment : Fragment() {
                                 AnimeRVModal(
                                     anime.id,
                                     anime.title,
-                                    anime.rating.toString(),
-                                    anime.episodeCount.toString(),
+                                    checkNullString(anime.rating.toString()),
+                                    checkNullString(anime.episodeCount.toString()),
                                     anime.posterImage
                                 )
                             )
@@ -80,6 +80,14 @@ class FavouritesFragment : Fragment() {
         }
 
         return root
+    }
+
+    fun checkNullString(str: Any?): String{
+        if(str == null)
+            return "--"
+        if(str.equals("null"))
+            return "--"
+        return str.toString()
     }
 
     override fun onResume() {

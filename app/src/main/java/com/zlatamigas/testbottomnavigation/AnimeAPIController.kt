@@ -5,6 +5,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.*
 import kotlinx.coroutines.*
+import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -20,13 +21,20 @@ class AnimeAPIController(var context: Context) {
                 "&include=genres"
         val request = JsonObjectRequest(url, null,
             { response ->
+
                 val data = response.getJSONObject("data")
                 val attributes = data.getJSONObject("attributes")
-                val genres = response.getJSONArray("included")
+
+                var genres: JSONArray? = null
+                if (!response.isNull("included")) {
+                    genres = response.getJSONArray("included")
+                }
                 val g = ArrayList<String>()
-                for(i in 0 until genres.length()) {
-                    val item = genres.getJSONObject(i).getJSONObject("attributes")
-                    g.add(item.getString("name"))
+                if(genres!=null) {
+                    for (i in 0 until genres.length()) {
+                        val item = genres.getJSONObject(i).getJSONObject("attributes")
+                        g.add(item.getString("name"))
+                    }
                 }
                 var episodeLength: Int? = null
                 var averageRating: Double? = null
