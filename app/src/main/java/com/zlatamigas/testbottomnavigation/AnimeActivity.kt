@@ -33,12 +33,14 @@ class AnimeActivity : AppCompatActivity() {
     var isNotified = false
 
     var idAnime: Int = -1
+    var anime: Anime? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anime)
 
-        //Receive data from bundle about depicted element
+        val dbController = DBController(DBHelper(this))
+
         val extr = intent.extras
         if (extr != null) {
             idAnime = extr.getInt("idAnime")
@@ -59,15 +61,33 @@ class AnimeActivity : AppCompatActivity() {
         idTVAnimeGenres = findViewById(R.id.idTVAnimeGenres)
         idTVAnimeDescription = findViewById(R.id.idTVAnimeDescription)
 
+        isFavourite = dbController.isFavourite(idAnime)
+
+        idIVAddFavourite.setImageResource(
+            if (isFavourite) {
+                R.drawable.ic_star_selected
+            }
+            else {
+                R.drawable.ic_star_not_selected
+            }
+        )
+
         idIVAddFavourite.setOnClickListener {
+            isFavourite = !isFavourite
             idIVAddFavourite.setImageResource(
                 if (isFavourite) {
-                    R.drawable.ic_star_not_selected
-                } else {
                     R.drawable.ic_star_selected
                 }
+                else {
+                    R.drawable.ic_star_not_selected
+                }
             )
-            isFavourite = !isFavourite
+            if (isFavourite) {
+                dbController.addFavourite(idAnime, anime!!.title)
+            }
+            else {
+                dbController.deleteFavourite(idAnime)
+            }
         }
 
         idIVAddNotification.setOnClickListener {
@@ -83,7 +103,7 @@ class AnimeActivity : AppCompatActivity() {
 
         val controller = this.let { it1 -> AnimeAPIController(it1) }
         GlobalScope.launch {
-            val anime = controller.getAnime(idAnime)
+            anime = controller.getAnime(idAnime)
             withContext(Dispatchers.Main) {
                 idTVAnimeTitle.setText(checkNullString(anime!!.title))
                 idTVAnimeRating.setText("${checkNullString(anime!!.rating)}/100")
@@ -91,6 +111,14 @@ class AnimeActivity : AppCompatActivity() {
                 //val input = SimpleDateFormat("ddd MMM dd HH:mm:ss ZZZZ yyyy")
                 val output = SimpleDateFormat("MM.yyyy")
 
+                var startDate = "Unknown"
+                var endDate = "Still running"
+                if (anime!!.startDate != null) {
+                    startDate = output.format(anime!!.startDate)
+                }
+                if (anime!!.endDate != null) {
+                    endDate = output.format(anime!!.endDate)
+                }
 
                 idTVAnimeYears.setText("${output.format(anime!!.startDate)} - ${output.format(anime!!.endDate)}")
                 idTVAnimeEpisodes.setText(
@@ -100,9 +128,9 @@ class AnimeActivity : AppCompatActivity() {
                         )
                     } min)"
                 )
-                idTVAnimeAge.setText("${checkNullString(anime.ageRating)}")
+                idTVAnimeAge.setText("${checkNullString(anime!!.ageRating)}")
                 idTVAnimeGenres.setText("Genres: ")
-                for (g in anime.genres) {
+                for (g in anime!!.genres) {
                     idTVAnimeGenres.append("${checkNullString(g)} ")
                 }
                 idTVAnimeDescription.setText(checkNullString(anime!!.synopsis))

@@ -31,6 +31,8 @@ class AnimeAPIController(var context: Context) {
                 var episodeLength: Int? = null
                 var averageRating: Double? = null
                 var episodeCount: Int? = null
+                var startDate: Date? = null
+                var endDate: Date? = null
                 if (!attributes.isNull("episodeLength")) {
                     episodeLength = attributes.getInt("episodeLength")
                 }
@@ -40,13 +42,21 @@ class AnimeAPIController(var context: Context) {
                 if (!attributes.isNull("episodeCount")) {
                     episodeCount = attributes.getInt("episodeCount")
                 }
+                if (!attributes.isNull("startDate")) {
+                    startDate = SimpleDateFormat("yyyy-mm-dd")
+                        .parse(attributes.getString("startDate"))
+                }
+                if (!attributes.isNull("endDate")) {
+                    endDate = SimpleDateFormat("yyyy-mm-dd")
+                        .parse(attributes.getString("endDate"))
+                }
                 val anime = Anime(
                     data.getInt("id"),
                     attributes.getString("canonicalTitle"),
                     attributes.getString("synopsis"),
                     averageRating,
-                    SimpleDateFormat("yyyy-mm-dd").parse(attributes.getString("startDate")),
-                    SimpleDateFormat("yyyy-mm-dd").parse(attributes.getString("endDate")),
+                    startDate,
+                    endDate,
                     episodeCount,
                     episodeLength,
                     attributes.getJSONObject("posterImage").getString("original"),
