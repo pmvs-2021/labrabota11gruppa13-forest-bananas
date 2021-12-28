@@ -45,7 +45,6 @@ class FavouritesFragment : Fragment() {
         idIVFilter.setOnClickListener(View.OnClickListener {
             //TODO
         })
-        fillDemoData()
 
         return root
     }
@@ -53,19 +52,5 @@ class FavouritesFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    fun fillDemoData() {
-        animeRVModalArrayList!!.clear()
-        for (i in 0 until 3) {
-            animeRVModalArrayList.add(
-                AnimeRVModal(
-                    (i * 45).toString(),
-                    "10/10",
-                    "133 Eps.",
-                    "//cdn-icons-png.flaticon.com/512/4508/4508103.png"
-                )
-            )
-        }
     }
 }

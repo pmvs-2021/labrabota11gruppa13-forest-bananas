@@ -3,6 +3,7 @@ package com.zlatamigas.testbottomnavigation
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class AnimeActivity : AppCompatActivity() {
@@ -22,11 +23,19 @@ class AnimeActivity : AppCompatActivity() {
     var isFavourite = false
     var isNotified = false
 
+    var idAnime: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anime)
 
         //Receive data from bundle about depicted element
+        val extr = intent.extras
+        if(extr!=null){
+            idAnime = extr.getInt("idAnime")
+            Toast.makeText(this, idAnime.toString(), Toast.LENGTH_SHORT).show()
+        }
+
 
         idIVAddFavourite = findViewById(R.id.idIVAddFavourite)
         idIVAddNotification = findViewById(R.id.idIVAddNotification)
