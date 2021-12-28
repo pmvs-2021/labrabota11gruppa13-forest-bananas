@@ -74,6 +74,7 @@ class AnimeActivity : AppCompatActivity() {
 
         idIVAddFavourite.setOnClickListener {
             isFavourite = !isFavourite
+
             idIVAddFavourite.setImageResource(
                 if (isFavourite) {
                     R.drawable.ic_star_selected
@@ -120,7 +121,7 @@ class AnimeActivity : AppCompatActivity() {
                     endDate = output.format(anime!!.endDate)
                 }
 
-                idTVAnimeYears.setText("${output.format(anime!!.startDate)} - ${output.format(anime!!.endDate)}")
+                idTVAnimeYears.setText("${startDate} - ${endDate}")
                 idTVAnimeEpisodes.setText(
                     "Episodes: ${checkNullString(anime!!.episodeCount)} (${
                         checkNullString(

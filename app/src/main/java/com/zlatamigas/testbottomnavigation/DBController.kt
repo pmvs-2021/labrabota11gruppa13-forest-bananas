@@ -119,7 +119,7 @@ class DBController(val helper: SQLiteOpenHelper)
 
     fun deleteFavourite(id: Int): Int {
         val db = helper.readableDatabase
-        return db.delete(FAVOURITES_TABLE_NAME, "$COLUMN_ROW_ID = $id", null)
+        return db.delete(FAVOURITES_TABLE_NAME, "$COLUMN_ID = $id", null)
     }
 
     fun updateReminderDate(rowId: Int, newDate: Date): Int {

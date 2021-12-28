@@ -81,6 +81,8 @@ class HomeFragment : Fragment() {
                                     )
                                 }
                             }
+
+                            animeRVAdapter.notifyDataSetChanged()
                         }
                     }
                 }
