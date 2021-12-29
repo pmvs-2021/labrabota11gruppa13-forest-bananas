@@ -8,11 +8,11 @@ class AnimeRVModal {
     var episodes: String? = null
     var preview: String? = null
 
-    constructor(id: Int, title: String?, rating: String?, eoisodes: String?, preview: String?) {
+    constructor(id: Int, title: String?, rating: String?, episodes: String?, preview: String?) {
         this.id = id
         this.title = title
         this.rating = rating
-        this.episodes = eoisodes
+        this.episodes = episodes
         this.preview = preview
     }
 }

@@ -13,16 +13,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import android.widget.Toast
-
-import android.widget.CalendarView
 
 import android.R
 import android.content.Context
+import android.widget.*
+import com.squareup.picasso.Picasso
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
+import com.zlatamigas.testbottomnavigation.Reminder
+import org.w3c.dom.Text
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class CalendarFragment : Fragment() {
@@ -43,11 +45,7 @@ class CalendarFragment : Fragment() {
         val reminders = dbController?.getReminders()
 
         val calendarView = binding.calendarView
-        val idRVAnimeListFound = binding.idRVAnimeListReminders
-
-        val animeRVModalArrayList = ArrayList<AnimeRVModal>()
-        val animeRVAdapter = AnimeRVAdapter(requireActivity(), animeRVModalArrayList!!)
-        idRVAnimeListFound.setAdapter(animeRVAdapter)
+        val scrollView = binding.scrollView
 
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
 
@@ -62,28 +60,57 @@ class CalendarFragment : Fragment() {
 
             val dateReminders = reminders?.filter { r ->
                 val temp = output.format(r.reminderDate)
-                temp.equals(nowDate) }
+                temp.equals(nowDate)
+            }
 
-            animeRVModalArrayList.clear()
-            animeRVAdapter.notifyDataSetChanged()
+            scrollView.removeAllViews()
 
             if (dateReminders != null) {
-                for (favourite in dateReminders) {
+                for (reminder in dateReminders) {
                     GlobalScope.launch {
-                        val anime = controller?.getAnime(favourite.id)
+                        val anime = controller?.getAnime(reminder.id)
                         withContext(Dispatchers.Main) {
                             if (anime != null) {
-                                animeRVModalArrayList.add(
-                                    AnimeRVModal(
-                                        anime.id,
-                                        anime.title,
-                                        checkNullString(anime.rating.toString()),
-                                        checkNullString(anime.episodeCount.toString()),
-                                        anime.posterImage
-                                    )
+                                val linear = LayoutInflater.from(activity).inflate(
+                                    com.zlatamigas.testbottomnavigation.R.layout.scroll_view_item,
+                                    scrollView,
+                                    false
                                 )
+                                val titleTv = linear.findViewById<TextView>(
+                                    com.zlatamigas.testbottomnavigation.R.id.idTVTitle
+                                )
+                                val button = linear.findViewById<ImageView>(
+                                    com.zlatamigas.testbottomnavigation.R.id.deleteButton
+                                )
+                                val ratingTv = linear.findViewById<TextView>(
+                                    com.zlatamigas.testbottomnavigation.R.id.idTVRating
+                                )
+                                val episodesTv = linear.findViewById<TextView>(
+                                    com.zlatamigas.testbottomnavigation.R.id.idTVEpisodes
+                                )
+                                val preview = linear.findViewById<ImageView>(
+                                    com.zlatamigas.testbottomnavigation.R.id.idIVPreview
+                                )
+                                Picasso.get().load(anime.posterImage.toString()).fit().into(preview)
+
+                                var rating = "--"
+                                var episodeCount = "--"
+                                if (anime.rating != null) {
+                                    rating = anime.rating.toString()
+                                }
+                                if (anime.episodeCount != null) {
+                                    episodeCount = anime.episodeCount.toString()
+                                }
+                                titleTv.text = anime.title
+                                ratingTv.text = "$rating/100"
+                                episodesTv.text = "$episodeCount Eps."
+                                button.setOnClickListener {
+                                    if (dbController.deleteReminder(reminder.rowId) == 1) {
+                                        (reminders as ArrayList<Reminder>).remove(reminder)
+                                    }
+                                }
+                                scrollView.addView(linear)
                             }
-                            animeRVAdapter.notifyDataSetChanged()
                         }
                     }
                 }

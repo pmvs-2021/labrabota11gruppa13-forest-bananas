@@ -18,6 +18,9 @@ class DBController(val helper: SQLiteOpenHelper)
     private val COLUMN_NOTIFY_DATE = "notify_date"
 
     fun addReminder(id: Int, name: String, date: Date): Boolean {
+        if (isReminder(id, date)) {
+            return false
+        }
         val cv = ContentValues()
         cv.put(COLUMN_ID, id)
         cv.put(COLUMN_NAME, name)
@@ -43,6 +46,16 @@ class DBController(val helper: SQLiteOpenHelper)
         val db = helper.readableDatabase
         val c = db.query(FAVOURITES_TABLE_NAME,
             null, "id=$id", null, null, null, null)
+        var result = c.moveToFirst()
+        c.close()
+        return result
+    }
+
+    fun isReminder(id: Int, date: Date): Boolean {
+        val db = helper.readableDatabase
+        val c = db.query(REMINDERS_TABLE_NAME,
+            null, "id=$id AND notify_date=\"${SimpleDateFormat().format(date)}\"",
+            null, null, null, null)
         var result = c.moveToFirst()
         c.close()
         return result
