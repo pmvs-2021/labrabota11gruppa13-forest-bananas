@@ -28,8 +28,6 @@ class FavouritesFragment : Fragment() {
     lateinit var animeRVAdapter: AnimeRVAdapter
 
     lateinit var idRVAnimeListFound: RecyclerView
-    lateinit var idSPFilter: Spinner
-    lateinit var idIVFilter: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,17 +37,11 @@ class FavouritesFragment : Fragment() {
         _binding = FragmentFavouritesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        idIVFilter = binding.idIVFilter
         idRVAnimeListFound = binding.idRVAnimeListUser
-        idSPFilter = binding.idSPFilter
 
         animeRVModalArrayList = ArrayList()
         animeRVAdapter = AnimeRVAdapter(requireActivity(), animeRVModalArrayList!!)
         idRVAnimeListFound.setAdapter(animeRVAdapter)
-
-        idIVFilter.setOnClickListener(View.OnClickListener {
-            //TODO
-        })
 
         val dbController = (activity as MainActivity).dbController
         val controller = this.context?.let { it1 -> AnimeAPIController(it1) }

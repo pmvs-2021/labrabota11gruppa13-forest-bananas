@@ -18,7 +18,9 @@
             android:id="@+id/idTISearch"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="4.5"
             android:background="@android:color/transparent"
             android:hint="Enter Anime"
@@ -55,16 +57,23 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="match_parent"
+    <HorizontalScrollView
+        android:id="@+id/idHSVFilter"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/idLLSearch"
-        android:gravity="center"
-        android:orientation="vertical"/>
+        android:layout_margin="20dp">
+        <LinearLayout
+            android:id="@+id/idLLFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"/>
+    </HorizontalScrollView>
+
 
     <FrameLayout
-        android:layout_below="@id/linear"
+        android:layout_below="@id/idHSVFilter"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

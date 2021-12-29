@@ -1,6 +1,7 @@
 package com.zlatamigas.testbottomnavigation.ui
 
 import android.R
+import android.R.attr
 import android.app.Activity
 import android.os.Bundle
 import android.view.Gravity
@@ -24,6 +25,12 @@ import java.util.ArrayList
 import android.widget.RadioButton
 
 import android.widget.RadioGroup
+import androidx.core.view.marginBottom
+import android.R.attr.right
+
+import android.R.attr.left
+
+import android.widget.LinearLayout
 
 
 
@@ -59,112 +66,61 @@ class HomeFragment : Fragment() {
         idPBLoadSearchResults = binding.idPBLoadSearchResults
         idIVSearch = binding.idIVSearch
         idTIESearch = binding.idTIESearch
-        linear = binding.linear
+        linear = binding.idLLFilter
 
         var filterBy = ArrayList<String>()
         var filters = ArrayList<String>()
         var sortBy: String? = null
 
         var grid = GridLayout(activity)
-        grid.columnCount = 4
+        grid.columnCount = 5
+
 
         var lable = TextView(activity)
         lable.text = "Genres:"
+        lable.setTextColor(resources.getColor(R.color.white))
         linear.addView(lable)
+
 
         val genresCheckboxes = ArrayList<CheckBox>()
         var check = CheckBox(activity)
-        check.text = "Adventure"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Comedy"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Mystery"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Action"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Horror"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Drama"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Magic"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Supernatural"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Fantasy"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Sports"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Romance"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Music"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Thriller"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "School"
-        grid.addView(check)
-        genresCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "Historical"
-        grid.addView(check)
-        genresCheckboxes.add(check)
+        val genresArray = arrayOf("Adventure", "Comedy", "Mystery", "Action",
+            "Horror", "Drama", "Magic", "School",
+            "Fantasy", "Sports", "Romance", "Music",
+            "Thriller", "Supernatural", "Historical")
+        for(gn in genresArray) {
+            check = CheckBox(activity)
+            check.text = gn
+            check.setTextColor(resources.getColor(R.color.white))
+            grid.addView(check)
+            genresCheckboxes.add(check)
+        }
         linear.addView(grid)
 
         grid = GridLayout(activity)
         grid.columnCount = 4
         lable = TextView(activity)
         lable.text = "Age ratings:"
+        lable.setTextColor(resources.getColor(R.color.white))
+        //lable.setLayoutParams(lp)
         linear.addView(lable)
 
         val agesCheckboxes = ArrayList<CheckBox>()
         check = CheckBox(activity)
-        check.text = "G"
-        grid.addView(check)
-        agesCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "PG"
-        grid.addView(check)
-        agesCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "R"
-        grid.addView(check)
-        agesCheckboxes.add(check)
-        check = CheckBox(activity)
-        check.text = "R18"
-        grid.addView(check)
-        agesCheckboxes.add(check)
+        val ageArray = arrayOf("G", "PG", "R", "R18")
+        for(an in ageArray){
+            check = CheckBox(activity)
+            check.text = an
+            check.setTextColor(resources.getColor(R.color.white))
+            grid.addView(check)
+            agesCheckboxes.add(check)
+        }
         linear.addView(grid)
+
 
         animeRVModalArrayList = ArrayList()
         animeRVAdapter = AnimeRVAdapter(requireActivity(), animeRVModalArrayList!!)
-
         idRVAnimeListFound.setAdapter(animeRVAdapter)
-
 
 
         idRVAnimeListFound.addOnScrollListener(object : RecyclerView.OnScrollListener() {
