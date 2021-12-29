@@ -19,7 +19,7 @@ ____
 ### `Usage`
 В главном меню ищем нужное нам произведение. Добавляем его в избранное, при необходимости можем удалить его. Так же возможен просмотр списка избранное.
 <p align="center">
-  <kbd> <img src="ScreanShots\cat.gif" alt="drawing" width="300" style="border-radius:10px"\></kbd>
+  <kbd> <img src="ScreanShots\demo.gif" alt="drawing" width="300" style="border-radius:10px"\></kbd>
 </p>
 
 * Ищем в главном меню нужное нам произведение.
