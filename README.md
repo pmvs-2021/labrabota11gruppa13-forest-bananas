@@ -1,6 +1,5 @@
 <p align="center">
 <img src="https://travis-ci.org/klugjo/hexo-autolinker.svg?branch=master">
-<img src="https://img.shields.io/amo/stars/youtube?color=dd&label=Rate&logo=ss&logoColor=ss&style=plastic">
 <img src="https://img.shields.io/amo/stars/youtube?color=dd&label=Rate&logo=ss&logoColor=ss">
 <img src="https://img.shields.io/amo/v/asd?label=version">
 <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
