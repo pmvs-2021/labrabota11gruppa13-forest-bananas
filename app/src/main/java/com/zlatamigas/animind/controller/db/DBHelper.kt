@@ -1,37 +1,8 @@
-package com.zlatamigas.testbottomnavigation
+package com.zlatamigas.animind.controller.db
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
-import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
-import com.zlatamigas.testbottomnavigation.databinding.ActivityMainBinding
-
-class MainActivity : AppCompatActivity() {
-
-    var dbController: DBController? = null
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val navView: BottomNavigationView = binding.navView
-
-        val helper = DBHelper(this)
-
-        dbController = DBController(helper)
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        navView.setupWithNavController(navController)
-    }
-}
 
 class DBHelper(context: Context): SQLiteOpenHelper(context,
     "AnimeDB", null, 1){

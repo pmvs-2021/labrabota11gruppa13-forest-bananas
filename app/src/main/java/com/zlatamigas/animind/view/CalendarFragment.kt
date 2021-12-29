@@ -1,12 +1,11 @@
-package com.zlatamigas.testbottomnavigation.ui
+package com.zlatamigas.animind.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
-import com.zlatamigas.testbottomnavigation.databinding.FragmentCalendarBinding
+import com.zlatamigas.animind.databinding.FragmentCalendarBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -16,12 +15,11 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.widget.*
-import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
-import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
-import com.zlatamigas.testbottomnavigation.*
-import org.w3c.dom.Text
-import java.lang.StringBuilder
+import com.zlatamigas.animind.*
+import com.zlatamigas.animind.controller.api.AnimeAPIController
+import com.zlatamigas.animind.model.Anime
+import com.zlatamigas.animind.model.Reminder
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -100,24 +98,24 @@ class CalendarFragment : Fragment() {
                         withContext(Dispatchers.Main) {
                             if (anime != null) {
                                 val linear = LayoutInflater.from(activity).inflate(
-                                    com.zlatamigas.testbottomnavigation.R.layout.scroll_view_item,
+                                    com.zlatamigas.animind.R.layout.scroll_view_item,
                                     scrollView,
                                     false
                                 )
                                 val titleTv = linear.findViewById<TextView>(
-                                    com.zlatamigas.testbottomnavigation.R.id.idTVTitle
+                                    com.zlatamigas.animind.R.id.idTVTitle
                                 )
                                 val button = linear.findViewById<ImageView>(
-                                    com.zlatamigas.testbottomnavigation.R.id.deleteButton
+                                    com.zlatamigas.animind.R.id.deleteButton
                                 )
                                 val ratingTv = linear.findViewById<TextView>(
-                                    com.zlatamigas.testbottomnavigation.R.id.idTVRating
+                                    com.zlatamigas.animind.R.id.idTVRating
                                 )
                                 val episodesTv = linear.findViewById<TextView>(
-                                    com.zlatamigas.testbottomnavigation.R.id.idTVEpisodes
+                                    com.zlatamigas.animind.R.id.idTVEpisodes
                                 )
                                 val preview = linear.findViewById<ImageView>(
-                                    com.zlatamigas.testbottomnavigation.R.id.idIVPreview
+                                    com.zlatamigas.animind.R.id.idIVPreview
                                 )
                                 Picasso.get()
                                     .load(anime.posterImage.toString())

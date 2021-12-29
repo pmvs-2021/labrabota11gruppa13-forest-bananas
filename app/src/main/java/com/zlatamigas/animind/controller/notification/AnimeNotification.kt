@@ -1,6 +1,6 @@
-package com.zlatamigas.testbottomnavigation.notification
+package com.zlatamigas.animind.controller.notification
 
-import com.zlatamigas.testbottomnavigation.R
+import com.zlatamigas.animind.R
 
 import android.app.NotificationManager
 import android.content.BroadcastReceiver

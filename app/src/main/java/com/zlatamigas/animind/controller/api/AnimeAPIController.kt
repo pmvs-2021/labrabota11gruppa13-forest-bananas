@@ -1,10 +1,8 @@
-package com.zlatamigas.testbottomnavigation
+package com.zlatamigas.animind.controller.api
 
 import android.content.Context
-import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.*
-import kotlinx.coroutines.*
+import com.zlatamigas.animind.model.Anime
 import org.json.JSONArray
 import java.text.SimpleDateFormat
 import java.util.*

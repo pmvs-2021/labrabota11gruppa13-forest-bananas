@@ -1,4 +1,4 @@
-package com.zlatamigas.testbottomnavigation
+package com.zlatamigas.animind.model
 
 import java.util.*
 import kotlin.collections.ArrayList

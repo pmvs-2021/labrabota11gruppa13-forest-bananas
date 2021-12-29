@@ -1,10 +1,7 @@
-package com.zlatamigas.testbottomnavigation.ui
+package com.zlatamigas.animind.view
 
 import android.R
-import android.R.attr
-import android.app.Activity
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,24 +11,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
-import com.zlatamigas.testbottomnavigation.AnimeAPIController
-import com.zlatamigas.testbottomnavigation.MainActivity
-import com.zlatamigas.testbottomnavigation.databinding.FragmentHomeBinding
+import com.zlatamigas.animind.controller.api.AnimeAPIController
+import com.zlatamigas.animind.databinding.FragmentHomeBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.ArrayList
-import android.widget.RadioButton
 
-import android.widget.RadioGroup
-import androidx.core.view.marginBottom
-import android.R.attr.right
-
-import android.R.attr.left
 import android.content.Context
 import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 
 import android.widget.LinearLayout

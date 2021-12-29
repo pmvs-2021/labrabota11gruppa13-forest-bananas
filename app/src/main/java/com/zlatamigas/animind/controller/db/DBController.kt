@@ -1,8 +1,9 @@
-package com.zlatamigas.testbottomnavigation
+package com.zlatamigas.animind.controller.db
 
 import android.content.ContentValues
 import android.database.sqlite.SQLiteOpenHelper
-import java.text.DateFormat
+import com.zlatamigas.animind.model.Favourite
+import com.zlatamigas.animind.model.Reminder
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList

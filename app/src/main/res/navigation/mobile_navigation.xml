@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.zlatamigas.testbottomnavigation.ui.HomeFragment"
+        android:name="com.zlatamigas.animind.view.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_calendar"
-        android:name="com.zlatamigas.testbottomnavigation.ui.CalendarFragment"
+        android:name="com.zlatamigas.animind.view.CalendarFragment"
         android:label="@string/title_calendar"
         tools:layout="@layout/fragment_calendar" />
 
     <fragment
         android:id="@+id/navigation_favourites"
-        android:name="com.zlatamigas.testbottomnavigation.ui.FavouritesFragment"
+        android:name="com.zlatamigas.animind.view.FavouritesFragment"
         android:label="@string/title_favourite"
         tools:layout="@layout/fragment_favourites" />
 </navigation>

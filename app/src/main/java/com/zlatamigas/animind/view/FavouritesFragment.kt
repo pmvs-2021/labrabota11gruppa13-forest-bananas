@@ -1,4 +1,4 @@
-package com.zlatamigas.testbottomnavigation.ui
+package com.zlatamigas.animind.view
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -7,16 +7,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
-import com.zlatamigas.testbottomnavigation.Anime
-import com.zlatamigas.testbottomnavigation.AnimeAPIController
-import com.zlatamigas.testbottomnavigation.MainActivity
-import com.zlatamigas.testbottomnavigation.databinding.FragmentFavouritesBinding
+import com.zlatamigas.animind.model.Anime
+import com.zlatamigas.animind.controller.api.AnimeAPIController
+import com.zlatamigas.animind.MainActivity
+import com.zlatamigas.animind.databinding.FragmentFavouritesBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

@@ -1,4 +1,4 @@
-package com.zlatamigas.testbottomnavigation
+package com.zlatamigas.animind
 
 import org.junit.Test
 

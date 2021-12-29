@@ -1,4 +1,4 @@
-package com.zlatamigas.testbottomnavigation
+package com.zlatamigas.animind
 
 import android.app.*
 import android.content.Context
@@ -11,7 +11,11 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
-import com.zlatamigas.testbottomnavigation.notification.*
+import com.zlatamigas.animind.controller.api.AnimeAPIController
+import com.zlatamigas.animind.controller.db.DBController
+import com.zlatamigas.animind.controller.db.DBHelper
+import com.zlatamigas.animind.model.Anime
+import com.zlatamigas.animind.controller.notification.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -111,7 +115,8 @@ class AnimeActivity : AppCompatActivity() {
         val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
         val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
         if (!isConnected) {
-            Toast.makeText(applicationContext, "Require Internet Connection", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Require Internet Connection", Toast.LENGTH_SHORT)
+                .show()
             finish()
             return
         }
@@ -190,7 +195,12 @@ class AnimeActivity : AppCompatActivity() {
                 .show()
         }
 
-    private fun scheduleNotification(title: String, date: Date, synopsis: String, imageUrl: String) {
+    private fun scheduleNotification(
+        title: String,
+        date: Date,
+        synopsis: String,
+        imageUrl: String
+    ) {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return
 
         val intent = Intent(applicationContext, AnimeNotification::class.java)

@@ -1,20 +1,17 @@
 package com.zlatamigas.pvimslab10_4_v2kotlin
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
-import com.zlatamigas.testbottomnavigation.AnimeActivity
-import com.zlatamigas.testbottomnavigation.R
+import com.zlatamigas.animind.AnimeActivity
+import com.zlatamigas.animind.R
 import java.lang.NumberFormatException
 import java.util.ArrayList
 
