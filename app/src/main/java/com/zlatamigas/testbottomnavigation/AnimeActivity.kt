@@ -3,6 +3,8 @@ package com.zlatamigas.testbottomnavigation
 import android.app.*
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -47,6 +49,7 @@ class AnimeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anime)
         createNotificationChannel()
+
 
         dbController = DBController(DBHelper(this))
 
@@ -103,9 +106,21 @@ class AnimeActivity : AppCompatActivity() {
 
         }
 
+        val cm =
+            applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+        if (!isConnected) {
+            Toast.makeText(applicationContext, "Require Internet Connection", Toast.LENGTH_SHORT).show()
+            finish()
+            return
+        }
+
         val controller = AnimeAPIController(this)
         GlobalScope.launch {
-            anime = controller.getAnime(idAnime)
+
+            var anime = controller.getAnime(idAnime)
+
             withContext(Dispatchers.Main) {
                 idTVAnimeTitle.text = checkNullString(anime!!.title)
                 idTVAnimeRating.text = "${checkNullString(anime!!.rating)}/100"

@@ -6,20 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
-import com.zlatamigas.testbottomnavigation.AnimeAPIController
-import com.zlatamigas.testbottomnavigation.MainActivity
 import com.zlatamigas.testbottomnavigation.databinding.FragmentCalendarBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-import android.R
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.widget.*
+import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
-import com.zlatamigas.testbottomnavigation.Reminder
+import com.zlatamigas.testbottomnavigation.*
 import org.w3c.dom.Text
 import java.lang.StringBuilder
 import java.text.SimpleDateFormat
@@ -63,12 +63,40 @@ class CalendarFragment : Fragment() {
                 temp.equals(nowDate)
             }
 
+
             scrollView.removeAllViews()
+
 
             if (dateReminders != null) {
                 for (reminder in dateReminders) {
+
                     GlobalScope.launch {
-                        val anime = controller?.getAnime(reminder.id)
+
+                        var anime: Anime? = null
+
+                        val cm =
+                            requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+                        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+                        if (isConnected) {
+                            anime = controller?.getAnime(reminder.id)
+                        }
+                        else{
+                            anime = Anime(
+                                reminder.id,
+                                reminder.name,
+                                "No description (Require Internet connection)",
+
+                                null,
+                                null,
+                                null,
+                                null,
+                                null,
+                                "h",
+                                arrayListOf(),
+                                ""
+                            )
+                        }
                         withContext(Dispatchers.Main) {
                             if (anime != null) {
                                 val linear = LayoutInflater.from(activity).inflate(
@@ -91,7 +119,9 @@ class CalendarFragment : Fragment() {
                                 val preview = linear.findViewById<ImageView>(
                                     com.zlatamigas.testbottomnavigation.R.id.idIVPreview
                                 )
-                                Picasso.get().load(anime.posterImage.toString()).fit().into(preview)
+                                Picasso.get()
+                                    .load(anime.posterImage.toString())
+                                    .error(R.drawable.ic_app_icon).fit().into(preview)
 
                                 var rating = "--"
                                 var episodeCount = "--"

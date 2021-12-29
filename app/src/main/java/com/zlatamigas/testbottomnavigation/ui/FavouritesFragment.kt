@@ -1,5 +1,8 @@
 package com.zlatamigas.testbottomnavigation.ui
 
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVAdapter
 import com.zlatamigas.pvimslab10_4_v2kotlin.AnimeRVModal
+import com.zlatamigas.testbottomnavigation.Anime
 import com.zlatamigas.testbottomnavigation.AnimeAPIController
 import com.zlatamigas.testbottomnavigation.MainActivity
 import com.zlatamigas.testbottomnavigation.databinding.FragmentFavouritesBinding
@@ -51,8 +55,34 @@ class FavouritesFragment : Fragment() {
 
         if (favourites != null) {
             for (favourite in favourites) {
+
                 GlobalScope.launch {
-                    val anime = controller?.getAnime(favourite.id)
+
+                    var anime: Anime? = null
+
+                    val cm =
+                        requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+                    val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+                    val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+                    if (isConnected) {
+                        anime = controller?.getAnime(favourite.id)
+                    }
+                    else{
+                        anime = Anime(
+                            favourite.id,
+                            favourite.name,
+                            "No description (Require Internet connection)",
+                            null,
+                            null,
+                            null,
+                            null,
+                            null,
+                            "h",
+                            arrayListOf(),
+                            ""
+                        )
+                    }
+
                     withContext(Dispatchers.Main) {
                         if (anime != null) {
                             animeRVModalArrayList.add(

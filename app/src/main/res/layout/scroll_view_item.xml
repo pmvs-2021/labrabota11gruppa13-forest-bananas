@@ -78,10 +78,10 @@
             android:id="@+id/deleteButton"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@android:drawable/ic_menu_delete"
-            android:layout_gravity="center_vertical"
             android:layout_alignEnd="@id/info"
-            android:layout_centerVertical="true" />
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:src="@android:drawable/ic_menu_delete" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
