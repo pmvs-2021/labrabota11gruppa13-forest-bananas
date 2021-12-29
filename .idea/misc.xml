@@ -3,8 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
-        <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/fragment_favourites.xml" value="0.15282392026578073" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable-v24/card_back.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_bookmark.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_calendar.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_flter.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_home.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_notifications.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_notify_off.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_notify_on.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_search.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_star_not_selected.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/drawable/ic_star_selected.xml" value="0.26875" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/layout/activity_anime.xml" value="0.2526041666666667" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/layout/activity_main.xml" value="0.2526041666666667" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/layout/anime_rv_item.xml" value="0.2526041666666667" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/layout/fragment_calendar.xml" value="0.2526041666666667" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/layout/fragment_favourites.xml" value="0.2526041666666667" />
+        <entry key="..\:/5sem/ReAnime/app/src/main/res/layout/fragment_home.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_bookmark.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_calendar.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.19583333333333333" />
@@ -24,7 +40,7 @@
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/drawable/ic_search.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/drawable/ic_star_not_selected.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/drawable/ic_star_selected.xml" value="0.19583333333333333" />
-        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/activity_anime.xml" value="0.33658536585365856" />
+        <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/activity_anime.xml" value="0.14666666666666667" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/activity_main.xml" value="0.12134831460674157" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/anime_rv_item.xml" value="0.1" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/pvims/pvimsLab11_project/app/src/main/res/layout/fragment_calendar.xml" value="0.16666666666666666" />

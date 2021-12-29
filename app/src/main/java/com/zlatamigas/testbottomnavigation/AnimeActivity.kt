@@ -1,11 +1,15 @@
 package com.zlatamigas.testbottomnavigation
 
-import android.app.DatePickerDialog
+import android.app.*
+import android.content.Context
+import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.squareup.picasso.Picasso
+import com.zlatamigas.testbottomnavigation.notification.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -15,39 +19,38 @@ import java.util.*
 
 class AnimeActivity : AppCompatActivity() {
 
-    lateinit var idIVAddFavourite: ImageView
-    lateinit var idIVAddNotification: ImageView
+    private lateinit var idIVAddFavourite: ImageView
+    private lateinit var idIVAddNotification: ImageView
+    private lateinit var idIVAnimeCover: ImageView
 
-    lateinit var idIVAnimeCover: ImageView
-    lateinit var idTVAnimeTitle: TextView
-    lateinit var idTVAnimeRating: TextView
-    lateinit var idTVAnimeYears: TextView
-    lateinit var idTVAnimeEpisodes: TextView
-    lateinit var idTVAnimeAge: TextView
-    lateinit var idTVAnimeGenres: TextView
-    lateinit var idTVAnimeDescription: TextView
-    lateinit var idPBLoadAnimePage: ProgressBar
-    lateinit var idSVAnimeData: ScrollView
+    private lateinit var idTVAnimeTitle: TextView
+    private lateinit var idTVAnimeRating: TextView
+    private lateinit var idTVAnimeYears: TextView
+    private lateinit var idTVAnimeEpisodes: TextView
+    private lateinit var idTVAnimeAge: TextView
+    private lateinit var idTVAnimeGenres: TextView
+    private lateinit var idTVAnimeDescription: TextView
 
-    lateinit var dbController: DBController
+    private lateinit var idPBLoadAnimePage: ProgressBar
+    private lateinit var idSVAnimeData: ScrollView
 
-    var dateAndTime: Calendar = Calendar.getInstance()
+    private lateinit var dbController: DBController
 
-    var isFavourite = false
+    private var dateAndTime: Calendar = Calendar.getInstance()
 
-    var idAnime: Int = -1
-    var anime: Anime? = null
+    private var isFavourite = false
+
+    private var idAnime: Int = -1
+    private var anime: Anime? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_anime)
+        createNotificationChannel()
 
         dbController = DBController(DBHelper(this))
 
-        val extr = intent.extras
-        if (extr != null) {
-            idAnime = extr.getInt("idAnime")
-        }
+        idAnime = intent.extras?.getInt("idAnime") ?: -1
 
         idIVAddFavourite = findViewById(R.id.idIVAddFavourite)
         idIVAddNotification = findViewById(R.id.idIVAddNotification)
@@ -67,11 +70,9 @@ class AnimeActivity : AppCompatActivity() {
         isFavourite = dbController.isFavourite(idAnime)
 
         idIVAddFavourite.setImageResource(
-            if (isFavourite) {
-                R.drawable.ic_star_selected
-            }
-            else {
-                R.drawable.ic_star_not_selected
+            when {
+                isFavourite -> R.drawable.ic_star_selected
+                else -> R.drawable.ic_star_not_selected
             }
         )
 
@@ -79,25 +80,22 @@ class AnimeActivity : AppCompatActivity() {
             isFavourite = !isFavourite
 
             idIVAddFavourite.setImageResource(
-                if (isFavourite) {
-                    R.drawable.ic_star_selected
-                }
-                else {
-                    R.drawable.ic_star_not_selected
+                when {
+                    isFavourite -> R.drawable.ic_star_selected
+                    else -> R.drawable.ic_star_not_selected
                 }
             )
-            if (isFavourite) {
-                dbController.addFavourite(idAnime, anime!!.title)
-            }
-            else {
-                dbController.deleteFavourite(idAnime)
+
+            when {
+                isFavourite -> dbController.addFavourite(idAnime, anime!!.title)
+                else -> dbController.deleteFavourite(idAnime)
             }
         }
 
         idIVAddNotification.setOnClickListener {
 
             DatePickerDialog(
-                this, dateChoosen,
+                this, dateChosen,
                 dateAndTime.get(Calendar.YEAR),
                 dateAndTime.get(Calendar.MONTH),
                 dateAndTime.get(Calendar.DAY_OF_MONTH)
@@ -105,12 +103,12 @@ class AnimeActivity : AppCompatActivity() {
 
         }
 
-        val controller = this.let { it1 -> AnimeAPIController(it1) }
+        val controller = AnimeAPIController(this)
         GlobalScope.launch {
             anime = controller.getAnime(idAnime)
             withContext(Dispatchers.Main) {
-                idTVAnimeTitle.setText(checkNullString(anime!!.title))
-                idTVAnimeRating.setText("${checkNullString(anime!!.rating)}/100")
+                idTVAnimeTitle.text = checkNullString(anime!!.title)
+                idTVAnimeRating.text = "${checkNullString(anime!!.rating)}/100"
 
                 //val input = SimpleDateFormat("ddd MMM dd HH:mm:ss ZZZZ yyyy")
                 val output = SimpleDateFormat("MM.yyyy")
@@ -124,33 +122,26 @@ class AnimeActivity : AppCompatActivity() {
                     endDate = output.format(anime!!.endDate)
                 }
 
-                idTVAnimeYears.setText("${startDate} - ${endDate}")
-                idTVAnimeEpisodes.setText(
-                    "Episodes: ${checkNullString(anime!!.episodeCount)} (${
-                        checkNullString(
-                            anime!!.episodeLength
-                        )
-                    } min)"
-                )
-                idTVAnimeAge.setText("${checkNullString(anime!!.ageRating)}")
-                idTVAnimeGenres.setText("Genres: ")
-                for (g in anime!!.genres) {
-                    idTVAnimeGenres.append("${checkNullString(g)} ")
-                }
-                idTVAnimeDescription.setText(checkNullString(anime!!.synopsis))
+                idTVAnimeYears.text = "$startDate - $endDate"
+                idTVAnimeEpisodes.text =
+                    "Episodes: ${checkNullString(anime!!.episodeCount)} (${checkNullString(anime!!.episodeLength)} min)"
+                idTVAnimeAge.text = "${checkNullString(anime!!.ageRating)}"
+                idTVAnimeGenres.text = "Genres: "
+
+                anime!!.genres.forEach { idTVAnimeGenres.append("${checkNullString(it)} ") }
+
+                idTVAnimeDescription.text = checkNullString(anime!!.synopsis)
                 Picasso.get().load(anime!!.posterImage).fit().into(idIVAnimeCover)
 
                 idPBLoadAnimePage.visibility = View.GONE
                 idSVAnimeData.visibility = View.VISIBLE
             }
-
         }
     }
 
-    fun checkNullString(str: Any?): String {
-        if (str == null)
-            return "--"
-        return str.toString()
+    private fun checkNullString(str: Any?): String = when (str) {
+        null -> "--"
+        else -> str.toString()
     }
 
     override fun onBackPressed() {
@@ -158,17 +149,68 @@ class AnimeActivity : AppCompatActivity() {
         finish()
     }
 
-
-
     // установка обработчика выбора даты
-    var dateChoosen =
-        DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+    private var dateChosen =
+        DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
             dateAndTime.set(Calendar.YEAR, year)
             dateAndTime.set(Calendar.MONTH, monthOfYear)
             dateAndTime.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-            dbController.addReminder(anime!!.id, anime!!.title, dateAndTime.time)
+            val title = anime!!.title
+            val date = dateAndTime.time
+            val synopsis = anime!!.synopsis
+            val imageUrl = anime!!.posterImage
+            dbController.addReminder(anime!!.id, title, date)
 
-            //TODO ADD NOTIFICATION OUT OF APP (ROMAN)
+            scheduleNotification(title, date, synopsis, imageUrl)
+
+            AlertDialog.Builder(this)
+                .setTitle("Well Done!")
+                .setMessage(
+                    "Your notification added!!" +
+                            "\nTitle: " + title +
+                            "\nAt: " + date
+                )
+                .setPositiveButton("Okay") { _, _ -> }
+                .show()
         }
+
+    private fun scheduleNotification(title: String, date: Date, synopsis: String, imageUrl: String) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return
+
+        val intent = Intent(applicationContext, AnimeNotification::class.java)
+        intent.putExtra(titleExtra, title)
+        intent.putExtra(bigText, synopsis)
+        intent.putExtra(bigImage, imageUrl)
+
+        val pendingIntent = PendingIntent.getBroadcast(
+            applicationContext, notificationID, intent, PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
+        val alarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+        calendar.add(Calendar.HOUR, 12)
+        // TODO(Сделать на релизе calendar.timeInMillis)
+        val time = System.currentTimeMillis() + 5000
+
+        alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, time, pendingIntent)
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return
+
+        val channel = NotificationChannel(
+            channelID,
+            "Notification Channel",
+            NotificationManager.IMPORTANCE_HIGH
+        )
+        channel.description = "A Description of the Channel"
+        channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
+
+        val notificationManager: NotificationManager =
+            getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        notificationManager.createNotificationChannel(channel)
+    }
 }
