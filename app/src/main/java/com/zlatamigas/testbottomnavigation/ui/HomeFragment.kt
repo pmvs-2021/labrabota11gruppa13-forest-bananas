@@ -29,11 +29,12 @@ import androidx.core.view.marginBottom
 import android.R.attr.right
 
 import android.R.attr.left
+import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.net.NetworkInfo
 
 import android.widget.LinearLayout
-
-
-
 
 
 class HomeFragment : Fragment() {
@@ -70,7 +71,7 @@ class HomeFragment : Fragment() {
 
         var filterBy = ArrayList<String>()
         var filters = ArrayList<String>()
-        var sortBy: String? = null
+        var sortBy: String? = "averageRating"
 
         var grid = GridLayout(activity)
         grid.columnCount = 5
@@ -84,11 +85,13 @@ class HomeFragment : Fragment() {
 
         val genresCheckboxes = ArrayList<CheckBox>()
         var check = CheckBox(activity)
-        val genresArray = arrayOf("Adventure", "Comedy", "Mystery", "Action",
+        val genresArray = arrayOf(
+            "Adventure", "Comedy", "Mystery", "Action",
             "Horror", "Drama", "Magic", "School",
             "Fantasy", "Sports", "Romance", "Music",
-            "Thriller", "Supernatural", "Historical")
-        for(gn in genresArray) {
+            "Thriller", "Supernatural", "Historical"
+        )
+        for (gn in genresArray) {
             check = CheckBox(activity)
             check.text = gn
             check.setTextColor(resources.getColor(R.color.white))
@@ -102,13 +105,12 @@ class HomeFragment : Fragment() {
         lable = TextView(activity)
         lable.text = "Age ratings:"
         lable.setTextColor(resources.getColor(R.color.white))
-        //lable.setLayoutParams(lp)
         linear.addView(lable)
 
         val agesCheckboxes = ArrayList<CheckBox>()
         check = CheckBox(activity)
         val ageArray = arrayOf("G", "PG", "R", "R18")
-        for(an in ageArray){
+        for (an in ageArray) {
             check = CheckBox(activity)
             check.text = an
             check.setTextColor(resources.getColor(R.color.white))
@@ -126,20 +128,22 @@ class HomeFragment : Fragment() {
         idRVAnimeListFound.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
-                if (!recyclerView.canScrollVertically(1)){
+                if (!recyclerView.canScrollVertically(1)) {
                     page++
                     GlobalScope.launch {
-                        val animes = controller?.getAnimes(idTIESearch.text.toString(),
-                            sortBy, filterBy, filters, page)
+                        val animes = controller?.getAnimes(
+                            idTIESearch.text.toString(),
+                            sortBy, filterBy, filters, page
+                        )
                         withContext(Dispatchers.Main) {
                             if (animes != null) {
                                 for (anime in animes) {
                                     animeRVModalArrayList.add(
                                         AnimeRVModal(
                                             anime.id,
-                                            anime.title,
-                                            anime.rating.toString(),
-                                            anime.episodeCount.toString(),
+                                            checkNullString(anime.title),
+                                            checkNullString(anime.rating.toString()),
+                                            checkNullString(anime.episodeCount.toString()),
                                             anime.posterImage
                                         )
                                     )
@@ -154,7 +158,24 @@ class HomeFragment : Fragment() {
         })
 
         idIVSearch.setOnClickListener(View.OnClickListener {
-            val str = idTIESearch.getText().toString()
+
+            page = 0
+
+            val cm =
+                requireActivity().getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+            val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+            val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+            if (!isConnected) {
+                Toast.makeText(requireContext(), "Check Internet Connection..", Toast.LENGTH_SHORT)
+                    .show()
+                return@OnClickListener
+            }
+
+            val str = idTIESearch.text.toString()
+            if (str.isNullOrEmpty())
+                sortBy = "averageRating"
+            else
+                sortBy = null
 
             filterBy = ArrayList<String>()
             filters = ArrayList<String>()
@@ -183,10 +204,9 @@ class HomeFragment : Fragment() {
                 filters.add(ages)
             }
 
-            page = 0
             GlobalScope.launch {
                 val animes = controller?.getAnimes(
-                    idTIESearch.text.toString(),
+                    str,
                     sortBy, filterBy, filters, page
                 )
                 withContext(Dispatchers.Main) {
@@ -215,8 +235,10 @@ class HomeFragment : Fragment() {
         return root
     }
 
-    fun checkNullString(str: Any?): String{
-        if(str == null)
+    fun checkNullString(str: Any?): String {
+        if (str == null)
+            return "--"
+        if (str.equals("null"))
             return "--"
         return str.toString()
     }
