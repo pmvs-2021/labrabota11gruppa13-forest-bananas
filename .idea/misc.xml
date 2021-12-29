@@ -5,8 +5,10 @@
       <map>
         <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/activity_anime.xml" value="0.1" />
         <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/anime_rv_item.xml" value="0.1" />
+        <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/checkbox.xml" value="0.136" />
         <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/fragment_calendar.xml" value="0.1" />
         <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/fragment_favourites.xml" value="0.15282392026578073" />
+        <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/fragment_home.xml" value="0.152" />
         <entry key="..\:/AndroidLabs/ReAnime/app/src/main/res/layout/scroll_view_item.xml" value="0.2" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_bookmark.xml" value="0.19583333333333333" />
         <entry key="..\:/Users/zlata/Documents/AndroidStudioProjects/TestBottomNavigation/app/src/main/res/drawable/ic_calendar.xml" value="0.19583333333333333" />

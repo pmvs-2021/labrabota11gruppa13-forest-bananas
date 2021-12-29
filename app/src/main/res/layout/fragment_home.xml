@@ -55,8 +55,15 @@
     </LinearLayout>
 
 
-    <FrameLayout
+    <GridLayout
+        android:id="@+id/grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/idLLSearch"
+        android:layout_gravity="center" />
+
+    <FrameLayout
+        android:layout_below="@id/grid"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 

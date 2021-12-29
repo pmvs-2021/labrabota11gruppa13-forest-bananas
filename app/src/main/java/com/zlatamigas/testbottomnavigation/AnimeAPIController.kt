@@ -101,7 +101,7 @@ class AnimeAPIController(var context: Context) {
         if (filterBy != null && filterBy.isNotEmpty()
             && filters != null && filters.size == filterBy.size) {
             for (i in 0 until filterBy.size) {
-                url += "filter[${filterBy[i]}]=${filters[i]}"
+                url += "&filter[${filterBy[i]}]=${filters[i]}"
             }
         }
 
