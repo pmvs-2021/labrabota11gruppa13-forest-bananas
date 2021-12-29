@@ -38,7 +38,10 @@ class AnimeRVAdapter(
         holder.titleTV.setText(modal.title)
         holder.episodesTV.setText("${modal.episodes}  Eps.")
 
-        Picasso.get().load(modal.preview.toString()).fit().into(holder.previewIV)
+        Picasso.get()
+            .load(modal.preview.toString())
+            .error(R.drawable.ic_app_icon)
+            .fit().into(holder.previewIV)
        }
 
     override fun getItemCount(): Int {

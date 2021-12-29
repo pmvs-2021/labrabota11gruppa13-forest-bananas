@@ -119,7 +119,7 @@ class AnimeActivity : AppCompatActivity() {
         val controller = AnimeAPIController(this)
         GlobalScope.launch {
 
-            var anime = controller.getAnime(idAnime)
+            anime = controller.getAnime(idAnime)
 
             withContext(Dispatchers.Main) {
                 idTVAnimeTitle.text = checkNullString(anime!!.title)
